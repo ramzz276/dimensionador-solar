@@ -175,7 +175,8 @@ function calcularPaso1_3() {
 // ===== SECCIÓN 2: DIMENSIONAMIENTO DE PANELES =====
 
 // PASO 2.1: Registrar HSP y calcular automáticamente 2.2
-function autoCalcularPaso2_2() {
+// Función para registrar HSP con botón
+function registrarHSP() {
     const HSP_input = document.getElementById('HSP').value;
     
     if (!HSP_input || HSP_input === '') {
@@ -214,9 +215,6 @@ function autoCalcularPaso2_2() {
             <p>P_arreglo = <span class="valor">${P_arreglo.toFixed(2)}</span> <span class="unidad">W</span></p>
         `;
         mostrarResultado('resultado-2-2', contenido2_2);
-        
-        // Auto-calcular 2.3 si hay datos
-        autoCalcularPaso2_3();
     }
 }
 
