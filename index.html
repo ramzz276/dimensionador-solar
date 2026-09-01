@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensionador Solar</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <!-- ENCABEZADO -->
+        <header class="encabezado">
+            <h1>Dimensionador Solar</h1>
+            <p class="subtitulo">Metodología de dimensionamiento de una estación de carga solar</p>
+        </header>
+
+        <!-- INTRODUCCIÓN GENERAL -->
+        <section class="seccion introduccion">
+            <h2>¿De qué trata esta herramienta?</h2>
+            <p>
+                Este dimensionador te ayuda a calcular los componentes principales de una <strong>estación de carga solar</strong> 
+                diseñada específicamente para <strong>vehículos eléctricos</strong>. Sin embargo, también puede utilizarse para 
+                diseñar sistemas de carga para otros tipos de dispositivos electrónicos que requieran energía autónoma.
+            </p>
+            <p>
+                A través de tres secciones, determinarás:
+            </p>
+            <ul>
+                <li><strong>Sección 1:</strong> La capacidad de batería necesaria según la potencia y tiempo de carga</li>
+                <li><strong>Sección 2:</strong> La cantidad y configuración óptima de paneles solares</li>
+                <li><strong>Sección 3:</strong> Las especificaciones mínimas del inversor recomendado</li>
+            </ul>
+            <p>
+                Ingresa tus datos reales en cada paso y el sistema te mostrará las recomendaciones específicas para tu caso.
+            </p>
+        </section>
+
+        <!-- SECCIÓN 1: DIMENSIONAMIENTO DE BATERÍAS -->
+        <section class="seccion" id="seccion-baterias">
+            <h2>1. Dimensionamiento de baterías</h2>
+            
+            <div class="descripcion-seccion">
+                <p>
+                    <strong>¿Por qué esta sección?</strong> El banco de baterías es el "depósito de energía" de tu sistema. 
+                    Necesitamos conocer cuánta potencia consumirá tu vehículo eléctrico y por cuánto tiempo, para recomendarte 
+                    una batería con capacidad suficiente.
+                </p>
+                <p>
+                    <strong>Resultado esperado:</strong> Una recomendación de capacidad mínima de batería (en Wh) 
+                    que garantice que tu sistema funcione sin depender del sol.
+                </p>
+            </div>
+
+            <!-- Paso 1.1 -->
+            <div class="paso">
+                <h3>Paso 1.1 — Potencia de consumo</h3>
+                <p class="subtitulo-paso">Ingresa la potencia máxima que consume el vehículo eléctrico</p>
+                <label for="P_dispositivo">Potencia del vehículo eléctrico (W)</label>
+                <input type="number" id="P_dispositivo" placeholder="Ej: 500" min="0" step="0.01">
+                <button class="btn-calcular" onclick="calcularPaso1_1()">Registrar potencia</button>
+                <div id="resultado-1-1" class="resultado"></div>
+            </div>
+
+            <!-- Paso 1.2 -->
+            <div class="paso">
+                <h3>Paso 1.2 — Tiempo de carga por sesión</h3>
+                <p class="subtitulo-paso">¿Por cuántas horas necesitas cargar en cada sesión?</p>
+                <label for="t_sesion">Duración de la sesión de carga (h)</label>
+                <input type="number" id="t_sesion" placeholder="Ej: 4" min="0" step="0.01">
+                <button class="btn-calcular" onclick="calcularPaso1_2()">Calcular energía de sesión</button>
+                <div id="resultado-1-2" class="resultado"></div>
+            </div>
+
+            <!-- Paso 1.3 -->
+            <div class="paso">
+                <h3>Paso 1.3 — Autonomía del sistema</h3>
+                <p class="subtitulo-paso">¿Cuántos vehículos estarán conectados al mismo tiempo para carga?</p>
+                <label for="num_dispositivos">Número de vehículos simultáneos</label>
+                <input type="number" id="num_dispositivos" placeholder="Ej: 2" min="1" step="1">
+                <button class="btn-calcular" onclick="calcularPaso1_3()">Calcular energía requerida y recomendar batería</button>
+                <div id="resultado-1-3" class="resultado"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: DIMENSIONAMIENTO DE PANELES -->
+        <section class="seccion" id="seccion-paneles">
+            <h2>2. Dimensionamiento de paneles solares</h2>
+
+            <div class="descripcion-seccion">
+                <p>
+                    <strong>¿Por qué esta sección?</strong> Los paneles solares son la "fuente de energía" del sistema. 
+                    Necesitamos determinar cuántos paneles necesitas y cómo conectarlos (en serie o paralelo) para 
+                    generar la potencia suficiente.
+                </p>
+                <p>
+                    <strong>Resultado esperado:</strong> Una configuración de paneles (cantidad, serie/paralelo) 
+                    y especificaciones eléctricas del arreglo.
+                </p>
+            </div>
+
+            <!-- Paso 2.1 -->
+            <div class="paso">
+                <h3>Paso 2.1 — Horas Solar Pico</h3>
+                
+                <div class="explicacion-hsp">
+                    <p>
+                        <strong>¿Qué son las Horas Solar Pico (HSP)?</strong><br>
+                        Son el número de horas diarias equivalentes en las que el sol irradia una potencia constante de 1000 W/m². 
+                        Esta medida es fundamental para calcular cuánta energía generarán tus paneles solares en tu ubicación específica.
+                    </p>
+                    <p>
+                        <strong>¿Cómo obtener este valor?</strong><br>
+                        Ingresa tu ciudad en la siguiente herramienta y obtendrás el promedio anual de HSP:
+                    </p>
+                    <a href="https://footprinthero.com/peak-sun-hours-calculator#how-to-calculate-peak-sun-hours" target="_blank" class="enlace-externo">
+                        📊 Calculadora de Horas Solar Pico (Footprint Hero)
+                    </a>
+                    <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+                        <strong>Nota importante:</strong> No es necesario ingresar el ángulo de inclinación ni de acimut del panel. 
+                        Simplemente busca tu ciudad y utiliza el <strong>promedio anual</strong> que sugiere la página.
+                    </p>
+                </div>
+
+                <label for="HSP">Horas Solar Pico promedio anual (h)</label>
+                <input type="number" id="HSP" placeholder="Ej: 4.5" min="0" step="0.01">
+                <button class="btn-calcular" onclick="registrarHSP()">Registrar Horas Solar Pico</button>
+                <div id="resultado-2-1" class="resultado"></div>
+            </div>
+
+            <!-- Paso 2.2 — Se muestra automáticamente cuando se registra HSP -->
+            <div class="paso" id="paso-2-2" style="display: none;">
+                <h3>Paso 2.2 — Potencia del arreglo solar</h3>
+                <p class="subtitulo-paso">Cálculo automático basado en energía requerida y Horas Solar Pico</p>
+                <div id="resultado-2-2" class="resultado"></div>
+            </div>
+
+            <!-- Paso 2.3 -->
+            <div class="paso">
+                <h3>Paso 2.3 — Configuración del arreglo de paneles</h3>
+                <p class="subtitulo-paso">Selecciona los paneles y verás 3 opciones de configuración</p>
+                <label for="P_panel">Potencia nominal del panel (W)</label>
+                <input type="number" id="P_panel" placeholder="Ej: 400" min="0" step="0.01" onchange="autoCalcularPaso2_3()">
+                
+                <label for="V_nominal">Voltaje nominal del panel (V)</label>
+                <select id="V_nominal" onchange="autoCalcularPaso2_3()">
+                    <option value="">-- Selecciona un voltaje --</option>
+                    <option value="12">12 V</option>
+                    <option value="24">24 V</option>
+                    <option value="48">48 V</option>
+                </select>
+                
+                <div id="resultado-2-3" class="resultado"></div>
+            </div>
+
+            <!-- Selección de opciones -->
+            <div class="paso">
+                <div id="selector-opciones" style="display:none;">
+                    <p style="font-weight: 600; margin-bottom: 15px;">Selecciona la configuración que prefieras:</p>
+                    <div id="opciones-container" style="display: grid; gap: 15px;">
+                        <!-- Las opciones se generarán dinámicamente aquí -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: DIMENSIONAMIENTO DEL INVERSOR -->
+        <section class="seccion" id="seccion-inversor">
+            <h2>3. Dimensionamiento del inversor</h2>
+
+            <div class="descripcion-seccion">
+                <p>
+                    <strong>¿Por qué esta sección?</strong> El inversor convierte la energía DC de los paneles 
+                    en energía AC para alimentar tu vehículo eléctrico. Sus especificaciones deben ser compatibles 
+                    con tu arreglo solar y carga.
+                </p>
+                <p>
+                    <strong>Resultado esperado:</strong> Especificaciones mínimas del inversor (potencia de entrada/salida) 
+                    y criterios técnicos para verificar compatibilidad.
+                </p>
+            </div>
+
+            <div class="paso">
+                <h3>Especificaciones del inversor</h3>
+                <div id="resultado-3" class="resultado"></div>
+            </div>
+        </section>
+
+        <!-- BOTÓN DE REINICIO -->
+        <footer class="pie">
+            <button class="btn-reiniciar" onclick="reiniciarApp()">Reiniciar cálculos</button>
+            <p class="nota">Versión 1.5 - Dimensionador Solar</p>
+        </footer>
+    </div>
+
+    <script src="calculos.js"></script>
+</body>
+</html>
