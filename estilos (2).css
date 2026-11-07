@@ -1,0 +1,387 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.contenedor-principal {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* ENCABEZADO */
+.encabezado {
+    background: linear-gradient(135deg, #2c5aa0 0%, #1e3f7f 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.encabezado .subtitulo {
+    font-size: 1.1em;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* SECCIONES */
+.seccion {
+    padding: 40px 30px;
+    border-bottom: 2px solid #ecf0f3;
+}
+
+.seccion:last-of-type {
+    border-bottom: none;
+}
+
+.seccion h2 {
+    font-size: 1.8em;
+    color: #2c5aa0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-left: 5px solid #2c5aa0;
+    padding-left: 15px;
+}
+
+/* PASOS */
+.paso {
+    background: #f8fafb;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #17a2b8;
+    transition: box-shadow 0.3s ease;
+}
+
+.paso:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.paso h3 {
+    font-size: 1.2em;
+    color: #1e3f7f;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.paso label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.paso input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.paso input:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    background-color: #f0f6fb;
+}
+
+.paso input:invalid {
+    border-color: #dc3545;
+}
+
+.paso .info {
+    font-size: 0.9em;
+    color: #666;
+    background-color: #e7f3ff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border-left: 3px solid #17a2b8;
+}
+
+/* BOTONES */
+.btn-calcular {
+    background: linear-gradient(135deg, #2c5aa0 0%, #1e3f7f 100%);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-calcular:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 90, 160, 0.3);
+}
+
+.btn-calcular:active {
+    transform: translateY(0);
+}
+
+.btn-calcular:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* DECISIÓN */
+.decision {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.decision p {
+    font-weight: 600;
+    color: #856404;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+}
+
+.botones-decision {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-si, .btn-no {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-si {
+    background: #28a745;
+    color: white;
+}
+
+.btn-si:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.btn-no {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-no:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+/* RESULTADOS */
+.resultado {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: none;
+}
+
+.resultado.visible {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+.resultado.error {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.resultado h4 {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    color: inherit;
+}
+
+.resultado p {
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.resultado .ecuacion {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+}
+
+.resultado .valor {
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.resultado .unidad {
+    color: #666;
+    font-size: 0.85em;
+}
+
+/* ANIMACIÓN */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* PIE DE PÁGINA */
+.pie {
+    background: #f8fafb;
+    padding: 30px;
+    text-align: center;
+    border-top: 2px solid #ecf0f3;
+}
+
+.btn-reiniciar {
+    background: #6c757d;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-reiniciar:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+}
+
+.pie .nota {
+    margin-top: 15px;
+    color: #999;
+    font-size: 0.9em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .encabezado h1 {
+        font-size: 2em;
+    }
+
+    .encabezado .subtitulo {
+        font-size: 1em;
+    }
+
+    .seccion {
+        padding: 25px 20px;
+    }
+
+    .seccion h2 {
+        font-size: 1.5em;
+    }
+
+    .paso {
+        padding: 15px;
+    }
+
+    .paso h3 {
+        font-size: 1.1em;
+    }
+
+    .botones-decision {
+        flex-direction: column;
+    }
+
+    .btn-si, .btn-no {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .encabezado {
+        padding: 25px 20px;
+    }
+
+    .encabezado h1 {
+        font-size: 1.6em;
+    }
+
+    .encabezado .subtitulo {
+        font-size: 0.9em;
+    }
+
+    .seccion {
+        padding: 15px;
+    }
+
+    .seccion h2 {
+        font-size: 1.3em;
+        padding-left: 10px;
+    }
+
+    .paso {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .paso h3 {
+        font-size: 1em;
+    }
+
+    .paso label {
+        font-size: 0.9em;
+    }
+
+    .paso input {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .resultado {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+}
