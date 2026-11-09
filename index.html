@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Sistema de gestión y supervisión de una estación de carga solar.">
+  <title>Estación Solar Inteligente</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Inicio"><span class="brand-mark">☀</span><span>Estación Solar</span></a>
+    <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menú</button>
+    <nav id="main-nav" class="nav" aria-label="Navegación principal">
+      <a class="active" href="index.html">Inicio</a><a href="dimensionamiento.html">Dimensionamiento</a><a href="monitoreo.html">Monitoreo</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Trabajo de grado · Fase de simulación</p>
+        <h1>Energía solar convertida en carga, datos y decisiones.</h1>
+        <p>Plataforma web para dimensionar y supervisar un punto de carga alimentado por generación fotovoltaica y almacenamiento en batería.</p>
+        <div class="actions"><a class="button primary" href="monitoreo.html">Ver monitoreo</a><a class="button secondary" href="dimensionamiento.html">Dimensionar sistema</a></div>
+      </div>
+      <div class="energy-visual" aria-label="Flujo de energía simulado">
+        <div class="energy-node solar"><span>Generación FV</span><strong>520 W</strong></div><span class="flow">→</span>
+        <div class="energy-node battery"><span>Batería</span><strong>78%</strong></div><span class="flow">→</span>
+        <div class="energy-node charge"><span>Punto de carga</span><strong>690 W</strong></div>
+      </div>
+    </section>
+    <section class="section">
+      <p class="eyebrow">Una sola plataforma</p><h2>Del diseño a la supervisión</h2>
+      <div class="feature-grid">
+        <article class="feature"><span class="feature-number">01</span><h3>Dimensionar</h3><p>Estimar energía diaria, potencia fotovoltaica y capacidad de batería para un escenario de operación.</p><a href="dimensionamiento.html">Abrir calculadora →</a></article>
+        <article class="feature"><span class="feature-number">02</span><h3>Supervisar</h3><p>Consultar generación, batería, sesión de carga, estados y alarmas desde ThingsBoard.</p><a href="monitoreo.html">Abrir tablero →</a></article>
+        <article class="feature"><span class="feature-number">03</span><h3>Integrar</h3><p>Preparado para incorporar Raspberry Pi, MQTT con HiveMQ y persistencia adicional mediante un backend seguro.</p><span class="muted">Próxima fase</span></article>
+      </div>
+    </section>
+    <section class="section architecture"><div><p class="eyebrow">Arquitectura prevista</p><h2>Datos separados de la interfaz</h2><p>Las credenciales y tokens permanecerán en los dispositivos o en el backend. Nunca se publicarán en GitHub Pages.</p></div><div class="pipeline"><span>Raspberry Pi</span><b>MQTT</b><span>HiveMQ</span><b>→</b><span>ThingsBoard</span><b>→</b><span>Web</span></div></section>
+  </main>
+  <footer><span>Estación Solar Inteligente</span><span>Prototipo académico · Datos simulados</span></footer>
+  <script src="app.js"></script>
+</body></html>
