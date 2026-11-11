@@ -31,9 +31,12 @@
     opciones: [], seleccion: null
   };
 
+  // estilos.css oculta .resultado salvo que tenga la clase "visible".
+  // Las variantes de color son "error" y "warning".
   function mostrar(el, html, clase) {
     if (!el) return;
-    el.className = 'resultado' + (clase ? ' ' + clase : '');
+    const variante = { error: 'error', advertencia: 'warning' }[clase];
+    el.className = 'resultado visible' + (variante ? ' ' + variante : '');
     el.innerHTML = html;
   }
   function limpiar(el) {
