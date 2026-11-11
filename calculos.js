@@ -208,6 +208,7 @@
 
     invalidar('2.3');
     const N = Math.ceil(estado.P_arreglo / P - EPS);
+    estado.panel = { N, P };
     estado.opciones = [1, 2, 3].map((p, i) => {
       const S = Math.ceil(N / p - EPS);
       const total = S * p;
@@ -232,25 +233,55 @@
     calcularOpciones(false);
   }
 
+  // Verificación de la opción elegida: cantidad de paneles y potencia frente a lo requerido.
+  function verificarOpcion(op) {
+    const { N } = estado.panel;
+    const Preq = estado.P_arreglo;
+    const cumpleCantidad = op.total >= N;
+    const cumplePotencia = op.P_final >= Preq;
+    const ok = cumpleCantidad && cumplePotencia;
+    const extra = op.total - N;
+    return `
+      <div class="resultado visible ${ok ? '' : 'error'}" style="grid-column:1/-1;">
+        <strong>Verificación de la Opción ${op.letra}: ${ok ? 'cumple' : 'no cumple'}</strong>
+        <ul style="margin:8px 0 0 18px;">
+          <li>Paneles requeridos: ${N} · Paneles de la opción: ${op.total}${extra > 0 ? ` (${extra} adicional(es))` : ''} · ${cumpleCantidad ? '✓' : '✗'}</li>
+          <li>Potencia requerida del arreglo: ${fmt(Preq, 0)} W · Potencia final: ${fmt(op.P_final, 0)} W · ${cumplePotencia ? '✓' : '✗'}</li>
+          <li>Voltaje del arreglo: ${fmt(op.V_arr, 0)} V · Corriente del arreglo: ${fmt(op.I_arr)} A</li>
+        </ul>
+        <p class="nota">Compara el voltaje y la corriente con Voc, Vmp, Imp y los límites del controlador antes de elegir el equipo.</p>
+      </div>`;
+  }
+
   function renderOpciones() {
     const cont = $('opciones-container');
     if (!cont) return;
-    cont.innerHTML = estado.opciones.map(o => `
-      <div style="border:1px solid #cbd7d1;border-radius:12px;padding:16px;background:#fff;">
-        <strong>Opción ${o.letra} · ${o.config}</strong>
+    const sel = estado.seleccion;
+    const tarjetas = estado.opciones.map(o => {
+      const marcada = o.letra === sel;
+      const estilo = marcada
+        ? 'border:2px solid #28a745;background:#d4edda;color:#155724;'
+        : 'border:1px solid #cbd7d1;background:#fff;';
+      return `
+      <div style="border-radius:12px;padding:16px;${estilo}">
+        <strong>Opción ${o.letra} · ${o.config}${marcada ? ' ✓' : ''}</strong>
         <ul style="margin:8px 0 12px 18px;">
           <li>Paneles totales: ${o.total}</li>
           <li>Voltaje del arreglo: ${fmt(o.V_arr, 0)} V</li>
           <li>Corriente del arreglo: ${fmt(o.I_arr)} A</li>
           <li>Potencia final del arreglo: ${fmt(o.P_final, 0)} W</li>
         </ul>
-        <button type="button" class="btn-calcular" data-opcion="${o.letra}">Seleccionar esta opción</button>
-      </div>`).join('');
+        <button type="button" class="btn-calcular" data-opcion="${o.letra}">${marcada ? 'Opción seleccionada' : 'Seleccionar esta opción'}</button>
+      </div>`;
+    }).join('');
+    const op = estado.opciones.find(o => o.letra === sel);
+    cont.innerHTML = tarjetas + (op ? verificarOpcion(op) : '');
     $('selector-opciones').style.display = 'block';
   }
 
   function seleccionarOpcion(letra) {
     estado.seleccion = letra;
+    renderOpciones();
     calcularSeccion3();
   }
 
