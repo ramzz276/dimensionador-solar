@@ -9,7 +9,7 @@
     FP: 1.25,
     nbat: 1,
     naut: 1,
-    maxBaterias: 6,
+    maxBaterias: 8,
     maxPanelesAviso: 15,
     tensionesPanel: Object.freeze([12, 24, 48]),
     dod: Object.freeze({ plomo: 0.5, litio: 0.8 }),
