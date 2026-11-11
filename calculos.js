@@ -179,12 +179,12 @@
 
     invalidar('2.3');
     estado.HSP = HSP;
-    const Epp = estado.banco.Ebanco * CONFIG.FP;
+    const Epp = estado.E_aut * CONFIG.FP;   // energía diaria consumida × factor de pérdidas
     estado.P_arreglo = Epp / HSP;
 
     mostrar(out, `HSP registradas: <strong>${fmt(HSP)} h</strong>.`, 'ok');
     mostrar($('resultado-2-2'), `
-      <p>Energía a producir (E_pp = E_banco × ${CONFIG.FP}): <strong>${fmt(Epp, 0)} Wh/día</strong></p>
+      <p>Energía a producir (E_pp = E_autosuficiencia × ${CONFIG.FP}): <strong>${fmt(Epp, 0)} Wh/día</strong></p>
       <p>Potencia del arreglo (P_arreglo = E_pp ÷ HSP): <strong>${fmt(estado.P_arreglo, 0)} W</strong></p>`, 'ok');
     $('paso-2-2').style.display = 'block';
     calcularOpciones(true);
